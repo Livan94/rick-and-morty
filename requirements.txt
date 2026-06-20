@@ -9,8 +9,12 @@ charset-normalizer==3.4.7
 click==8.4.1
 Django==6.0.6
 djangorestframework==3.17.1
+drf-spectacular==0.29.0
 frozenlist==1.8.0
 idna==3.18
+inflection==0.5.1
+jsonschema==4.26.0
+jsonschema-specifications==2025.9.1
 multidict==6.7.1
 mypy_extensions==1.1.0
 packaging==26.2
@@ -18,8 +22,12 @@ pathspec==1.1.1
 platformdirs==4.10.0
 propcache==0.5.2
 pytokens==0.4.1
+PyYAML==6.0.3
+referencing==0.37.0
 requests==2.34.2
+rpds-py==2026.5.1
 sqlparse==0.5.5
 typing_extensions==4.15.0
+uritemplate==4.2.0
 urllib3==2.7.0
 yarl==1.24.2

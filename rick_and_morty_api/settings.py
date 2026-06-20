@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "rest_framework",
+    "drf_spectacular",
 
     "characters",
 ]
@@ -123,3 +124,14 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 RICK_AND_MORTY_API_CHARACTERS_URL = 'https://rickandmortyapi.com/api/character'
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Rick and Morty API',
+    'DESCRIPTION': 'Documentation for Rick and Morty API',
+    'VERSION': '1.0.0',
+    "SERVE_INCLUDE_SHEMA": False,
+}
