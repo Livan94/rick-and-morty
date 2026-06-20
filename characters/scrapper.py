@@ -1,3 +1,4 @@
+import time
 import requests
 from django.conf import settings
 
@@ -10,6 +11,13 @@ def scrape_characters() -> list[Character]:
 
     while next_url_to_scrape:
         response = requests.get(next_url_to_scrape, timeout=10)
+
+        if response.status_code == 429:
+            retry_after = response.headers.get("Retry-After")
+            wait_seconds = int(retry_after) if retry_after and retry_after.isdigit() else 60
+            time.sleep(wait_seconds)
+            continue
+
         response.raise_for_status()
         data = response.json()
 
@@ -26,5 +34,16 @@ def scrape_characters() -> list[Character]:
             )
 
         next_url_to_scrape = data["info"]["next"]
+        time.sleep(0.3)
 
     return characters
+
+
+def save_characters(characters: list[Character]) -> None:
+    for character in characters:
+        character.save()
+
+
+def sync_characters_with_api() -> None:
+    characters = scrape_characters()
+    save_characters(characters)
