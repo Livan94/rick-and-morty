@@ -24,21 +24,35 @@ query GetCharacters($page: Int!) {
 }
 """
 
+MAX_CONCURRENT_REQUESTS = 2
+RETRY_ATTEMPTS = 5
+semaphore = asyncio.Semaphore(MAX_CONCURRENT_REQUESTS)
+
 
 async def fetch_characters_page(
     session: aiohttp.ClientSession,
     page: int,
 ) -> dict:
-    async with session.post(
-        settings.RICK_AND_MORTY_API_GRAPHQL_URL,
-        json={
-            "query": GRAPHQL_QUERY,
-            "variables": {"page": page},
-        },
-    ) as response:
-        response.raise_for_status()
-        data = await response.json()
-        return data["data"]["characters"]
+    for attempt in range(RETRY_ATTEMPTS):
+        async with semaphore:
+            async with session.post(
+                settings.RICK_AND_MORTY_API_GRAPHQL_URL,
+                json={
+                    "query": GRAPHQL_QUERY,
+                    "variables": {"page": page},
+                },
+            ) as response:
+                if response.status == 429:
+                    retry_after = response.headers.get("Retry-After", "10")
+                    wait_seconds = int(retry_after) if retry_after.isdigit() else 10
+                    await asyncio.sleep(wait_seconds)
+                    continue
+
+                response.raise_for_status()
+                data = await response.json()
+                return data["data"]["characters"]
+
+    raise RuntimeError(f"Failed to fetch page {page} after {RETRY_ATTEMPTS} retries")
 
 
 async def scrape_characters_async() -> list[Character]:
