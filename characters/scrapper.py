@@ -44,7 +44,7 @@ async def fetch_characters_page(
             ) as response:
                 if response.status == 429:
                     retry_after = response.headers.get("Retry-After", "10")
-                    wait_seconds = int(retry_after) if retry_after.isdigit() else 10
+                    wait_seconds = int(retry_after) if retry_after.isdigit() else 10  # noqa: E501
                     await asyncio.sleep(wait_seconds)
                     continue
 
@@ -52,7 +52,9 @@ async def fetch_characters_page(
                 data = await response.json()
                 return data["data"]["characters"]
 
-    raise RuntimeError(f"Failed to fetch page {page} after {RETRY_ATTEMPTS} retries")
+    raise RuntimeError(
+        f"Failed to fetch page {page} after {RETRY_ATTEMPTS} retries"
+    )
 
 
 async def scrape_characters_async() -> list[Character]:

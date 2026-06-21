@@ -4,12 +4,12 @@ from characters.views import get_random_character_view, CharacterListView
 
 urlpatterns = [
     path(
-        'characters/random/',
+        "characters/random/",
         get_random_character_view,
         name="character-random"
     ),
     path(
-        'characters/',
+        "characters/",
         CharacterListView.as_view(),
         name="character-list"
         ),

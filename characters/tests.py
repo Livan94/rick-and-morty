@@ -168,7 +168,10 @@ class ScrapeCharactersAsyncTest(TestCase):
 
 class ScrapperSyncTest(TestCase):
     @patch("characters.scrapper.save_characters", new_callable=AsyncMock)
-    @patch("characters.scrapper.scrape_characters_async", new_callable=AsyncMock)
+    @patch(
+        "characters.scrapper.scrape_characters_async",
+        new_callable=AsyncMock
+    )
     def test_sync_characters_with_api_calls_scrape_and_save(
         self, mock_scrape, mock_save
     ):
