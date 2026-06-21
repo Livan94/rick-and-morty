@@ -16,6 +16,8 @@
 - Create venv: `python -m venv .venv`
 - Activate it: `source .venv/bin/activate`
 - Install requirements: `pip install -r requirements.txt`
+- Create new DB & User
+- Copy .env_sample as .env: `cp .env_sample .env`
 - Run migrations: `python manage.py migrate`
 - Run Redis Server: `docker run -d -p 6379:6379 redis`
 - Run celery for tasks handling: `celery -A rick_and_morty_api worker -l INFO`
