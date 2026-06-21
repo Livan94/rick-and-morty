@@ -20,7 +20,9 @@ django-celery-beat==2.9.0
 django-timezone-field==7.2.2
 djangorestframework==3.17.1
 drf-spectacular==0.29.0
+flower==2.0.1
 frozenlist==1.8.0
+humanize==4.15.0
 idna==3.18
 inflection==0.5.1
 jsonschema==4.26.0
@@ -31,6 +33,7 @@ mypy_extensions==1.1.0
 packaging==26.2
 pathspec==1.1.1
 platformdirs==4.10.0
+prometheus_client==0.25.0
 prompt_toolkit==3.0.52
 propcache==0.5.2
 psycopg2-binary==2.9.12
@@ -38,6 +41,7 @@ python-crontab==3.3.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.2
 pytokens==0.4.1
+pytz==2026.2
 PyYAML==6.0.3
 redis==8.0.0
 referencing==0.37.0
@@ -45,6 +49,7 @@ requests==2.34.2
 rpds-py==2026.5.1
 six==1.17.0
 sqlparse==0.5.5
+tornado==6.5.7
 typing_extensions==4.15.0
 tzdata==2026.2
 tzlocal==5.4.3
