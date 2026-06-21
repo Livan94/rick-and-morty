@@ -13,14 +13,9 @@
 4. All endpoints should be documented via Swagger.
 
 ### How to run:
-- Create venv: `python -m venv .venv`
-- Activate it: `source .venv/bin/activate`
-- Install requirements: `pip install -r requirements.txt`
-- Create new DB & User
-- Copy .env_sample as .env: `cp .env_sample .env`
-- Run migrations: `python manage.py migrate`
-- Run Redis Server: `docker run -d -p 6379:6379 redis`
-- Run celery for tasks handling: `celery -A rick_and_morty_api worker -l INFO`
-- Run celery beat for task scheduling: `celery -A rick_and_morty_api beat -l INFO`
-- Create schedule for running sync in DB
-- Run app: `python manage.py runserver`
+- Copy `.env_sample` as `.env`: `cp .env_sample .env`
+- Build and start all services: `docker compose up --build`
+- Create superuser: `docker compose exec web python manage.py createsuperuser`
+- Open API: `http://localhost:8000/api/characters/`
+- Open admin panel: `http://localhost:8000/admin/`
+- Create schedule for running sync in DB via Django admin
