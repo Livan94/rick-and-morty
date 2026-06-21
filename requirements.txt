@@ -33,6 +33,7 @@ pathspec==1.1.1
 platformdirs==4.10.0
 prompt_toolkit==3.0.52
 propcache==0.5.2
+psycopg2-binary==2.9.12
 python-crontab==3.3.0
 python-dateutil==2.9.0.post0
 pytokens==0.4.1
