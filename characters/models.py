@@ -24,6 +24,9 @@ class Character(models.Model):
     )
     image = models.URLField(max_length=255)
 
+    class Meta:
+        ordering = ["api_id"]
+
     def __str__(self) -> str:
         return self.name
 
